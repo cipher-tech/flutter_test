@@ -14,7 +14,6 @@ expressConfig.run(app);
 
 // Starts the server
 app.listen(port, () => {
-    logger.info("Server running");
     console.log(`Server is listening on port ${port}`);
 });
  
