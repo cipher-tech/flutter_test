@@ -1,3 +1,3 @@
-import UserService from "./userService";
+import ChatService from "./chatService";
 
-export default UserService;
+export default ChatService;
