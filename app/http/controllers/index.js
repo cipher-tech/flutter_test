@@ -1,5 +1,3 @@
-import AuthControllerClass from "./authController";
-import userControllerClass from "./userController";
+import chatControllerClass from "./chatController";
 
-export const AuthController = AuthControllerClass;
-export const UserController = userControllerClass;
+export const ChatController = chatControllerClass;
