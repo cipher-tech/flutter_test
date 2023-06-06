@@ -1,12 +1,12 @@
 // eslint-disable-next-line
-import webpack from 'webpack';
-import path from "path";
-import NodemonPlugin from "nodemon-webpack-plugin";
-import nodeExternals from "webpack-node-externals";
+const webpack = require('webpack');
+const path = require('path');
+const NodemonPlugin = require('nodemon-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 const dirname = path.resolve();
 
-export default {
+module.exports = {
     target: "node",
     mode: "development",
     devtool: "eval",
