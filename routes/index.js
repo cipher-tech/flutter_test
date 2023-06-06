@@ -1,7 +1,6 @@
 import express from "express";
 import Response from "../app/utils/responseHandler";
-import AuthRoute from "./v1/authRoute";
-import UserRoute from "./v1/userRoute";
+import ChatRoute from "./v1/chatRoute";
 
 /**
  * Main Router that contains Application routes
@@ -14,8 +13,7 @@ class Router {
         this.response = null;
         // instantiates the class where we define our authentication routes
         // and adds the authentication routes defined in the class to our routes
-        this.authRoute = new AuthRoute(this.router);
-        this.userRoute = new UserRoute(this.router);
+        this.chatRoute = new ChatRoute(this.router);
     }
 
     indexRoute() {
@@ -29,8 +27,7 @@ class Router {
     }
 
     run() {
-        this.router.use("/auth", this.authRoute.run());
-        this.router.use("/users", this.userRoute.run());
+        this.router.use("/chat_room", this.chatRoute.run());
         this.indexRoute();
 
         return this.router;

@@ -9,7 +9,6 @@ import loggerInit from "./logger";
 import Router from "../routes";
 import config from ".";
 import { RandomNumberHelper } from "../app/utils";
-import db from "../database";
 import ApiError from "../app/exceptions/apiError";
 
 /**
@@ -99,16 +98,11 @@ class ExpressConfig {
         app.use(this.ApiError.genericError);
     }
 
-    configureDatabase() {
-        return db.sequelize.sync();
-    }
-
     /**
      * Main Method that bootstraps and calls all the configuration methods
      * @param {object} app - express app
      */
     run(app) {
-        this.configureDatabase();
         // calls the method to configure our logger
         this.configureLogger(app);
 
