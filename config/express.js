@@ -5,7 +5,6 @@ import morgan from "morgan";
 import fileUpload from "express-fileupload";
 import cors from "cors";
 
-import loggerInit from "./logger";
 import Router from "../routes";
 import config from ".";
 import { RandomNumberHelper } from "../app/utils";
@@ -18,9 +17,6 @@ import ApiError from "../app/exceptions/apiError";
  */
 class ExpressConfig {
     constructor() {
-        // instantiates the logger
-        this.logger = null;
-
         // Generate a correlationId from RandomNumberHelper class for grouping logs
         this.correlationId = new RandomNumberHelper();
 
@@ -33,43 +29,6 @@ class ExpressConfig {
 
         this.router = new Router();
         this.ApiError = new ApiError();
-    }
-
-    /**
-     * Method to configure application logger
-     * @param {object} app - express app
-     */
-    configureLogger(app) {
-        let accessLogStream;
-
-        // initialize logger for the right environment
-        if (app.get("env") === "development") {
-            this.logger = loggerInit("development");
-        } else if (app.get("env") === "test") {
-            this.logger = loggerInit("test");
-        } else if (app.get("env") === "staging") {
-            this.logger = loggerInit("staging");
-        } else if (app.get("env") === "production") {
-            this.logger = loggerInit("production");
-        } else {
-            this.logger = loggerInit();
-        }
-
-        // makes logger a global variable so you don't have to import it in your file to use it.
-        global.logger = this.logger;
-        logger.info("Application starting...");
-        logger.debug("Overriding Express logger");
-
-        // checks if the log directory exists and starts streaming logs to the file
-        if (this.checkLogDir) {
-            accessLogStream = FileStreamRotator.getStream({
-                date_format: "YYYYMMDD",
-                filename: `${this.logDirectory}/log-%DATE%.log`,
-                frequency: "weekly",
-                verbose: false
-            });
-        }
-        app.use(morgan("combined", { stream: accessLogStream }));
     }
 
     /**
@@ -103,9 +62,6 @@ class ExpressConfig {
      * @param {object} app - express app
      */
     run(app) {
-        // calls the method to configure our logger
-        this.configureLogger(app);
-
         // calls the method to configure our routes
         this.configureRoutes(app);
 
