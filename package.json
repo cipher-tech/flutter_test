@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage --detectOpenHandles --silent=false",
-    "build": "webpack --watch",
-    "start": "webpack"
+    "build": "webpack",
+    "start": "node ./dist/main.js",
+    "dev": "webpack --watch"
   },
   "jest": {
     "verbose": true,
