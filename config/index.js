@@ -7,7 +7,8 @@ import production from "./env/production";
 
 const defaults = {
     root: path.normalize(`${__dirname}/..`),
-    serviceName: "Node Boilerplate API"
+    serviceName: "Node Boilerplate API",
+    API_VERSION: "v1"
 };
 
 const config = {
